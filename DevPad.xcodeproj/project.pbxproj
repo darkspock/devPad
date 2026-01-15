@@ -16,11 +16,13 @@
 		A1000006 /* TerminalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000006 /* TerminalView.swift */; };
 		A1000007 /* MarkdownEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000007 /* MarkdownEditorView.swift */; };
 		A1000008 /* MarkdownPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000008 /* MarkdownPreviewView.swift */; };
+		A100000F /* CodeEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200000F /* CodeEditorView.swift */; };
 		A1000009 /* FileExplorerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000009 /* FileExplorerViewModel.swift */; };
 		A100000A /* TerminalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200000A /* TerminalViewModel.swift */; };
 		A100000B /* MarkdownViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200000B /* MarkdownViewModel.swift */; };
 		A100000C /* MarkdownParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200000C /* MarkdownParser.swift */; };
 		AB000001 /* SwiftTerm in Frameworks */ = {isa = PBXBuildFile; productRef = AC000001 /* SwiftTerm */; };
+		AB000002 /* Highlightr in Frameworks */ = {isa = PBXBuildFile; productRef = AC000002 /* Highlightr */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,7 @@
 		A2000006 /* TerminalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalView.swift; sourceTree = "<group>"; };
 		A2000007 /* MarkdownEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownEditorView.swift; sourceTree = "<group>"; };
 		A2000008 /* MarkdownPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownPreviewView.swift; sourceTree = "<group>"; };
+		A200000F /* CodeEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeEditorView.swift; sourceTree = "<group>"; };
 		A2000009 /* FileExplorerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileExplorerViewModel.swift; sourceTree = "<group>"; };
 		A200000A /* TerminalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalViewModel.swift; sourceTree = "<group>"; };
 		A200000B /* MarkdownViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownViewModel.swift; sourceTree = "<group>"; };
@@ -46,6 +49,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB000001 /* SwiftTerm in Frameworks */,
+				AB000002 /* Highlightr in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +94,7 @@
 				A2000006 /* TerminalView.swift */,
 				A2000007 /* MarkdownEditorView.swift */,
 				A2000008 /* MarkdownPreviewView.swift */,
+				A200000F /* CodeEditorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -137,6 +142,7 @@
 			name = DevPad;
 			packageProductDependencies = (
 				AC000001 /* SwiftTerm */,
+				AC000002 /* Highlightr */,
 			);
 			productName = DevPad;
 			productReference = A3000001 /* DevPad.app */;
@@ -168,6 +174,7 @@
 			mainGroup = A5000001;
 			packageReferences = (
 				AD000001 /* XCRemoteSwiftPackageReference "SwiftTerm" */,
+				AD000002 /* XCRemoteSwiftPackageReference "Highlightr" */,
 			);
 			productRefGroup = A5000007 /* Products */;
 			projectDirPath = "";
@@ -192,6 +199,7 @@
 				A1000006 /* TerminalView.swift in Sources */,
 				A1000007 /* MarkdownEditorView.swift in Sources */,
 				A1000008 /* MarkdownPreviewView.swift in Sources */,
+				A100000F /* CodeEditorView.swift in Sources */,
 				A1000009 /* FileExplorerViewModel.swift in Sources */,
 				A100000A /* TerminalViewModel.swift in Sources */,
 				A100000B /* MarkdownViewModel.swift in Sources */,
@@ -404,6 +412,14 @@
 				minimumVersion = 1.2.0;
 			};
 		};
+		AD000002 /* XCRemoteSwiftPackageReference "Highlightr" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/raspu/Highlightr.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -411,6 +427,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AD000001 /* XCRemoteSwiftPackageReference "SwiftTerm" */;
 			productName = SwiftTerm;
+		};
+		AC000002 /* Highlightr */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD000002 /* XCRemoteSwiftPackageReference "Highlightr" */;
+			productName = Highlightr;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

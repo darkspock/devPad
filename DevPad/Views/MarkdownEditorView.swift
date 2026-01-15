@@ -3,6 +3,10 @@ import SwiftUI
 struct MarkdownEditorView: View {
     @ObservedObject var viewModel: MarkdownViewModel
 
+    private var detectedLanguage: String? {
+        viewModel.currentFileURL?.path.detectedLanguage
+    }
+
     var body: some View {
         VStack(spacing: 0) {
             // Mini toolbar
@@ -28,14 +32,14 @@ struct MarkdownEditorView: View {
 
             Divider()
 
-            // Text editor
-            TextEditor(text: Binding(
-                get: { viewModel.content },
-                set: { viewModel.updateContent($0) }
-            ))
-            .font(.system(.body, design: .monospaced))
-            .scrollContentBackground(.hidden)
-            .background(Color(NSColor.textBackgroundColor))
+            // Code editor with syntax highlighting
+            CodeEditorView(
+                text: Binding(
+                    get: { viewModel.content },
+                    set: { viewModel.updateContent($0) }
+                ),
+                language: detectedLanguage
+            )
         }
     }
 }
