@@ -5,34 +5,25 @@ struct MarkdownEditorView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            // Editor toolbar
+            // Mini toolbar
             HStack {
-                if viewModel.isDirty {
-                    Circle()
-                        .fill(Color.orange)
-                        .frame(width: 8, height: 8)
-                    Text("Unsaved changes")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
-
                 Spacer()
 
                 Button(action: viewModel.save) {
                     Image(systemName: "opticaldiscdrive.fill")
                 }
                 .buttonStyle(.borderless)
-                .disabled(viewModel.currentFileURL == nil && viewModel.content.isEmpty)
+                .disabled(viewModel.currentFileURL == nil)
                 .help("Save")
 
                 Button(action: viewModel.saveAs) {
-                    Image(systemName: "folder.badge.plus")
+                    Image(systemName: "document.on.document")
                 }
                 .buttonStyle(.borderless)
                 .help("Save as...")
             }
             .padding(.horizontal, 12)
-            .padding(.vertical, 6)
+            .padding(.vertical, 4)
             .background(Color(NSColor.controlBackgroundColor))
 
             Divider()

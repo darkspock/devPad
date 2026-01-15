@@ -127,6 +127,9 @@ struct SwiftTermTabView: NSViewRepresentable {
         terminalView.configureNativeColors()
         terminalView.font = NSFont.monospacedSystemFont(ofSize: 13, weight: .regular)
 
+        // Allow Option key to compose special characters (@ on Spanish keyboard)
+        terminalView.optionAsMetaKey = false
+
         // Store reference
         DispatchQueue.main.async {
             tab.terminalView = terminalView

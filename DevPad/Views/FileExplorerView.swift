@@ -4,8 +4,10 @@ struct FileExplorerView: View {
     @ObservedObject var viewModel: FileExplorerViewModel
     @State private var showNewFileDialog = false
     @State private var showNewFolderDialog = false
+    @State private var showRenameDialog = false
     @State private var newItemName = ""
     @State private var targetDirectory: URL?
+    @State private var itemToRename: FileItem?
 
     var body: some View {
         VStack(spacing: 0) {
@@ -35,7 +37,7 @@ struct FileExplorerView: View {
                 .help("New file")
 
                 Button(action: viewModel.openFolder) {
-                    Image(systemName: "folder.badge.plus")
+                    Image(systemName: "folder")
                 }
                 .buttonStyle(.borderless)
                 .help("Open folder")
@@ -61,6 +63,11 @@ struct FileExplorerView: View {
                         targetDirectory = dir
                         newItemName = "New Folder"
                         showNewFolderDialog = true
+                    },
+                    onRename: { item in
+                        itemToRename = item
+                        newItemName = item.name
+                        showRenameDialog = true
                     }
                 )
             }
@@ -99,6 +106,20 @@ struct FileExplorerView: View {
                 onCreate: {
                     viewModel.createFolder(named: newItemName, in: targetDirectory)
                     showNewFolderDialog = false
+                }
+            )
+        }
+        .sheet(isPresented: $showRenameDialog) {
+            NewItemDialog(
+                title: "Rename",
+                placeholder: "New name",
+                itemName: $newItemName,
+                onCancel: { showRenameDialog = false },
+                onCreate: {
+                    if let item = itemToRename {
+                        viewModel.renameItem(item, to: newItemName)
+                    }
+                    showRenameDialog = false
                 }
             )
         }
@@ -142,6 +163,7 @@ struct FileRowView: View {
     let level: Int
     var onNewFile: ((URL) -> Void)?
     var onNewFolder: ((URL) -> Void)?
+    var onRename: ((FileItem) -> Void)?
 
     @State private var children: [FileItem] = []
 
@@ -177,7 +199,14 @@ struct FileRowView: View {
                 Spacer()
             }
             .padding(.vertical, 4)
+            .padding(.horizontal, 6)
             .padding(.leading, CGFloat(level * 16))
+            .background(
+                viewModel.selectedFile?.id == item.id
+                    ? Color.accentColor.opacity(0.2)
+                    : Color.clear
+            )
+            .cornerRadius(4)
             .contentShape(Rectangle())
             .onTapGesture {
                 viewModel.selectItem(item)
@@ -195,6 +224,9 @@ struct FileRowView: View {
                     }
                     Divider()
                 }
+                Button("Rename...") {
+                    onRename?(item)
+                }
                 Button("Delete", role: .destructive) {
                     viewModel.deleteItem(item)
                 }
@@ -208,7 +240,8 @@ struct FileRowView: View {
                         viewModel: viewModel,
                         level: level + 1,
                         onNewFile: onNewFile,
-                        onNewFolder: onNewFolder
+                        onNewFolder: onNewFolder,
+                        onRename: onRename
                     )
                 }
             }

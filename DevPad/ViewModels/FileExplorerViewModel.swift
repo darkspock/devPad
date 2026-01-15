@@ -91,4 +91,10 @@ class FileExplorerViewModel: ObservableObject {
         try? FileManager.default.removeItem(at: item.url)
         loadDirectory()
     }
+
+    func renameItem(_ item: FileItem, to newName: String) {
+        let newURL = item.url.deletingLastPathComponent().appendingPathComponent(newName)
+        try? FileManager.default.moveItem(at: item.url, to: newURL)
+        loadDirectory()
+    }
 }
